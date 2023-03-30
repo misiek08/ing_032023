@@ -1,0 +1,110 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "ATMs service team task",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/"
+    }
+  ],
+  "paths": {
+    "/atms/calculateOrder": {
+      "post": {
+        "description": "Calculates ATMs order for service team",
+        "operationId": "calculate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceTasks"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ServiceTasks": {
+        "type": "array",
+        "description": "List of service tasks",
+        "items": {
+          "$ref": "#/components/schemas/Task"
+        }
+      },
+      "Task": {
+        "type": "object",
+        "properties": {
+          "region": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 9999,
+            "example": 10
+          },
+          "requestType": {
+            "type": "string",
+            "description": "Type of request",
+            "example": "STANDARD",
+            "enum": [
+              "STANDARD",
+              "PRIORITY",
+              "SIGNAL_LOW",
+              "FAILURE_RESTART"
+            ]
+          },
+          "atmId": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 9999,
+            "example": 500
+          }
+        }
+      },
+      "Order": {
+        "description": "Ordered list of ATMs to service",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ATM"
+        }
+      },
+      "ATM": {
+        "type": "object",
+        "description": "ATMs details",
+        "properties": {
+          "region": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 9999,
+            "example": 10
+          },
+          "atmId": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 9999,
+            "example": 500
+          }
+        }
+      }
+    }
+  }
+}

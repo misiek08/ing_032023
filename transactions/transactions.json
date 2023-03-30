@@ -1,0 +1,108 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Transactions task",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/"
+    }
+  ],
+  "paths": {
+    "/transactions/report": {
+      "post": {
+        "description": "Execute report",
+        "operationId": "report",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Transactions"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Accounts"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Transactions": {
+        "type": "array",
+        "maxItems": 100000,
+        "items": {
+          "$ref": "#/components/schemas/Transaction"
+        }
+      },
+      "Transaction": {
+        "type": "object",
+        "properties": {
+          "debitAccount": {
+            "type": "string",
+            "example": 3.2309111922661937e+25,
+            "maxLength": 26,
+            "minLength": 26
+          },
+          "creditAccount": {
+            "type": "string",
+            "example": 3.107431869813706e+25,
+            "maxLength": 26,
+            "minLength": 26
+          },
+          "amount": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "Accounts": {
+        "type": "array",
+        "description": "Ordered list of accounts",
+        "items": {
+          "$ref": "#/components/schemas/Account"
+        }
+      },
+      "Account": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "type": "string",
+            "example": 3.2309111922661937e+25,
+            "maxLength": 26,
+            "minLength": 26
+          },
+          "debitCount": {
+            "description": "Number of debit transactions",
+            "type": "integer",
+            "format": "int32",
+            "example": 2
+          },
+          "creditCount": {
+            "description": "Number of credit transactions",
+            "type": "integer",
+            "format": "int32",
+            "example": 2
+          },
+          "balance": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      }
+    }
+  }
+}

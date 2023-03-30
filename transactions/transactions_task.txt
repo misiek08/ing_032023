@@ -1,0 +1,15 @@
+# Transakcje
+
+W pewnym dużym banku, każdego dnia, przeprowadzanych są tysiące transakcji na rachunkach. 
+Są to zarówno przelewy przychodzące (wpływy) jak i wychodzące (wydatki).
+
+Jeden z działów banku chciałby wiedzieć, jak zmienia się saldo na wszystkich rachunkach po przetworzeniu transakcji z całego dnia. 
+Dodatkowo ma wymaganie, aby lista rachunków była posortowana rosnąco.
+
+Przewiduje się, że w niedalekiej przyszłości, takich transakcji może być nawet 100 000, ponieważ stale powiększa się jego baza klientów. 
+Nasz system musi być na to gotowy!
+
+## Zadanie:
+Napisz algorytm, który przetworzy wszystkie transakcji i zwróci posortowaną listę rachunków, wraz z ilością uznań i obciążeń oraz saldo końcowe.
+Zakłada się, że saldo początkowe każdego rachunku to 0zł.
+

@@ -1,0 +1,99 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Online game task",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/"
+    }
+  ],
+  "paths": {
+    "/onlinegame/calculate": {
+      "post": {
+        "description": "Calculate order",
+        "operationId": "calculate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Players"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Players": {
+        "type": "object",
+        "properties": {
+          "groupCount": {
+            "description": "Number of players in single group",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000,
+            "example": 6
+          },
+          "clans": {
+            "type": "array",
+            "maxItems": 20000,
+            "items": {
+              "$ref": "#/components/schemas/Clan"
+            }
+          }
+        }
+      },
+      "Clan": {
+        "type": "object",
+        "properties": {
+          "numberOfPlayers": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000,
+            "example": 10
+          },
+          "points": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000000,
+            "example": 500
+          }
+        }
+      },
+      "Order": {
+        "description": "Ordered list of groups",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Group"
+        }
+      },
+      "Group": {
+        "type": "array",
+        "description": "Ordered list of clans in group",
+        "items": {
+          "$ref": "#/components/schemas/Clan"
+        }
+      }
+    }
+  }
+}
